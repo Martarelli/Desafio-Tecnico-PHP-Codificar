@@ -1,5 +1,5 @@
 @extends('layouts/template')
 
 @section('content')
-<button type="button" class="btn btn-primary">Primary</button>
+<a href="{{ url('/create') }}" class="btn btn-primary">Criar Orçamento</button>
 @endsection

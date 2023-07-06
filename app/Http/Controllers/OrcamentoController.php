@@ -12,7 +12,9 @@ class OrcamentoController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $orcamentos = Orcamento::all();
+
+        return view('index', compact('orcamentos'));
     }
 
     /**
@@ -20,7 +22,7 @@ class OrcamentoController extends Controller
      */
     public function create()
     {
-        //
+        return view('create');
     }
 
     /**

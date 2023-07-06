@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('orcamentos', function (Blueprint $table) {
             $table->id();
+            $table->string('cliente');
+            $table->string('vendedor');
+            $table->longText('descricao');
+            $table->double('valor');
             $table->timestamps();
         });
     }

@@ -30,7 +30,26 @@ class OrcamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'cliente' => 'required|max:255',
+            'vendedor' => 'required|max:255',
+            'descricao' => 'required|max:255',
+            'valor' => 'required|min:1',
+        ];
+
+        $messages = [
+            'cliente.required' => 'O campo cliente é obrigatório.',
+            'vendedor.required' => 'O campo vendedor é obrigatório.',
+            'descricao.required' => 'O campo descrição é obrigatório.',
+            'valor.required' => 'O campo valor é obrigatório.',
+            'valor.min' => 'O valor deve ser maior que 1.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
     }
 
     /**

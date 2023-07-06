@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Orcamento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class OrcamentoController extends Controller
 {
@@ -34,7 +35,7 @@ class OrcamentoController extends Controller
             'cliente' => 'required|max:255',
             'vendedor' => 'required|max:255',
             'descricao' => 'required|max:255',
-            'valor' => 'required|min:1',
+            'valor' => 'required|numeric|min:1',
         ];
 
         $messages = [

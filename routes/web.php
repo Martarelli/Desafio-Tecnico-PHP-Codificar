@@ -15,3 +15,5 @@ use App\Http\Controllers\OrcamentoController;
 */
 
 Route::get('/', [OrcamentoController::class, 'index']);
+Route::get('/create', [OrcamentoController::class, 'create']);
+Route::post('/create/store', [OrcamentoController::class, 'store']);

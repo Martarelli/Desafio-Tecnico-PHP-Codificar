@@ -9,11 +9,9 @@ use Illuminate\Support\Facades\Validator;
 
 class OrcamentoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
+        //Captura dos campos do filtro
         $filtro = array(
             'cliente' => isset($_GET['cliente']) ? $_GET['cliente'] : '' ,
             'vendedor' => isset($_GET['vendedor']) ? $_GET['vendedor'] : '' ,
@@ -21,6 +19,7 @@ class OrcamentoController extends Controller
             'dataFinal' => isset($_GET['dataFinal']) ? $_GET['dataFinal'] : '' ,
         );
 
+        //Inclusão dos filtros na Query
         $registros = Orcamento::query();
 
         if ($filtro['cliente']){
@@ -39,24 +38,20 @@ class OrcamentoController extends Controller
             $registros->whereDate('created_at', '<=', $filtro['dataFinal']);
         }
 
+        //Execução da consulta no BD
         $orcamentos = $registros->orderBy('created_at', 'desc')->get();
 
         return view('index', compact('orcamentos', 'filtro'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
+        //Validação dos campos do form
         $rules = [
             'cliente' => 'required|max:255',
             'vendedor' => 'required|max:255',
@@ -74,10 +69,12 @@ class OrcamentoController extends Controller
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
+        //Verificação se foi validado ou não
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        //Cria o registro no BD
         Orcamento::create([
             'cliente' => $request->cliente,
             'vendedor' => $request->vendedor,
@@ -88,31 +85,43 @@ class OrcamentoController extends Controller
         return redirect('/');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Orcamento $orcamento)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
+        //Procura o registro no BD pelo ID
         $orcamento = Orcamento::find($id);
 
         return view('edit', compact('orcamento','id'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id)
     {
+        //Validação dos campos do form
+        $rules = [
+            'cliente' => 'required|max:255',
+            'vendedor' => 'required|max:255',
+            'descricao' => 'required|max:255',
+            'valor' => 'required|numeric|min:1',
+        ];
+
+        $messages = [
+            'cliente.required' => 'O campo cliente é obrigatório.',
+            'vendedor.required' => 'O campo vendedor é obrigatório.',
+            'descricao.required' => 'O campo descrição é obrigatório.',
+            'valor.required' => 'O campo valor é obrigatório.',
+            'valor.min' => 'O valor deve ser maior que 1.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        //Verificação se foi validado ou não
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        //Procura o registro no BD pelo ID
         $orcamento = Orcamento::find($id);
 
+        //Atualização do registro no BD
         $orcamento -> update([
             'cliente' => $request -> cliente,
             'vendedor' => $request -> vendedor,
@@ -122,14 +131,11 @@ class OrcamentoController extends Controller
          ]);
 
         return redirect('/');
-
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
+        //Exclui o registro no BD pelo ID
         Orcamento::destroy($id);
 
         return redirect('/');

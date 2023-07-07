@@ -2,7 +2,7 @@
 # Desafio-Tecnico-PHP-Codificar
 
 Repositório destinado a elaboração do Desafio Técnico PHP - Básico - Oficina CRUD da Codificar.
-O App desenvolvido foi um CRUD de orçamentos desenvolvido com Laravel e MySQL.
+O App desenvolvido foi um CRUD de orçamentos e exibição dos registros com filtro, desenvolvido com Laravel e MySQL.
 
 
 ## Autores

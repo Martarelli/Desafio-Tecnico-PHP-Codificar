@@ -25,12 +25,10 @@ class OrcamentoController extends Controller
 
         if ($filtro['cliente']){
             $registros->where('cliente','like', '%'. $filtro['cliente'] .'%');
-
         }
 
         if($filtro['vendedor'] !== ''){
             $registros->where('vendedor','like', '%'. $filtro['vendedor'] .'%');
-
         }
 
         if($filtro['dataInicial'] !== '') {

@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
             <label class="mt-3" for="valor">Valor R$</label>
-            <input class="w-100" type="number" step="0.1" name="valor">
+            <input class="w-100" type="number" step="0.01" min="0" name="valor">
         </div>
         <button type="submit" class="btn btn-primary w-100 mt-4">Salvar Orçamento</button>
         <button type="reset" class="btn btn-secondary w-100 mt-4">Limpar</button>

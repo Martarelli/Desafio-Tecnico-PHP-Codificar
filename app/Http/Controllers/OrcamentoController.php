@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Orcamento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Validator;
 
 class OrcamentoController extends Controller
@@ -51,6 +52,15 @@ class OrcamentoController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
+
+        Orcamento::create([
+            'cliente' => $request->cliente,
+            'vendedor' => $request->vendedor,
+            'descricao' => $request->descricao,
+            'valor' => $request->valor,
+        ]);
+
+        return redirect('/');
     }
 
     /**

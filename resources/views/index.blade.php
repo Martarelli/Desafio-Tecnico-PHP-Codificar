@@ -1,33 +1,32 @@
 @extends('layouts/template')
 
 @section('content')
-<a href="{{ url('/create') }}" class="btn btn-primary m-3">Criar Orçamento</a>
-<div class="w-100 d-flex flex-column justify-content-center">
-    <div class="container">
-        <form class="d-flex" action="/" method="get">
-            <div class="form-group">
-                <label class="mt-3" for="cliente">Cliente</label>
-                <input class="w-100" type="text" name="cliente" value={{!empty($filtro) ? $filtro['cliente'] : ''}}>
-            </div>
-            <div class="form-group">
-                <label class="mt-3" for="vendedor">Vendedor</label>
-                <input class="w-100" type="text" name="vendedor" value={{!empty($filtro) ? $filtro['vendedor'] : ''}}>
-            </div>
-            <div class="form-group">
-                <label class="mt-3" for="dataInicial">Data Inicial</label>
-                <input class="w-100" type="date" name="dataInicial" value={{!empty($filtro) ? $filtro['dataInicial'] : ''}}>
-            </div>
-            <div class="form-group">
-                <label class="mt-3" for="dataFinal">Data Final</label>
-                <input class="w-100" type="date" name="dataFinal" value={{!empty($filtro) ? $filtro['dataFinal'] : ''}}>
-            </div>
-            <button type="submit" class="btn btn-primary w-100 mt-4">Filtrar</button>
-            <a href="/" class="btn btn-secondary w-100 mt-4">Limpar Filtro</a>
+<div class="w-100 d-flex flex-column justify-content-center p-5">
+    <a href="{{ url('/create') }}" class="btn btn-primary w-25 mb-5">Criar Orçamento</a>
+        <form class="d-flex justify-content-around align-items-center w-75" action="/" method="get">
+                <div class="form-group">
+                    <label class="" for="cliente">Cliente</label>
+                    <input class="p-2" type="text" name="cliente" value={{!empty($filtro) ? $filtro['cliente'] : ''}}>
+                </div>
+                <div class="form-group">
+                    <label class="" for="vendedor">Vendedor</label>
+                    <input class="p-2" type="text" name="vendedor" value={{!empty($filtro) ? $filtro['vendedor'] : ''}}>
+                </div>
+                <div class="form-group">
+                    <label class="pl-3" for="dataInicial">Data Inicial</label>
+                    <input class="p-2" type="date" name="dataInicial" value={{!empty($filtro) ? $filtro['dataInicial'] : ''}}>
+                </div>
+                <div class="form-group">
+                    <label class="pl-3" for="dataFinal">Data Final</label>
+                    <input class="p-2" type="date" name="dataFinal" value={{!empty($filtro) ? $filtro['dataFinal'] : ''}}>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary px-3">Filtrar</button>
+                    <a href="/" class="btn btn-secondary">Limpar</a>
+                </div>
         </form>
 
-    </div>
-
-    <table class="table table-striped table-bordered table-hover table-light m-3">
+    <table class="table table-striped table-bordered table-hover table-light my-3">
         <thead>
             <tr>
                 <th class="text-center" scope="col">Cliente</th>

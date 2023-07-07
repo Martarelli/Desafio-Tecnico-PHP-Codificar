@@ -99,24 +99,39 @@ class OrcamentoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Orcamento $orcamento)
+    public function edit($id)
     {
-        //
+        $orcamento = Orcamento::find($id);
+
+        return view('edit', compact('orcamento','id'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Orcamento $orcamento)
+    public function update(Request $request, $id)
     {
-        //
+        $orcamento = Orcamento::find($id);
+
+        $orcamento -> update([
+            'cliente' => $request -> cliente,
+            'vendedor' => $request -> vendedor,
+            'descricao' => $request -> descricao,
+            'valor' => $request -> valor,
+            'updated_at' => now()->timezone('-03:00'),
+         ]);
+
+        return redirect('/');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Orcamento $orcamento)
+    public function destroy($id)
     {
-        //
+        Orcamento::destroy($id);
+
+        return redirect('/');
     }
 }

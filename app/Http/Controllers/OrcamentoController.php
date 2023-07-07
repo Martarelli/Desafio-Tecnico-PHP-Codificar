@@ -12,11 +12,38 @@ class OrcamentoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orcamentos = Orcamento::orderBy('created_at', 'desc')->get();
+        $filtro = array(
+            'cliente' => isset($_GET['cliente']) ? $_GET['cliente'] : '' ,
+            'vendedor' => isset($_GET['vendedor']) ? $_GET['vendedor'] : '' ,
+            'dataInicial' => isset($_GET['dataInicial']) ? $_GET['dataInicial'] : '' ,
+            'dataFinal' => isset($_GET['dataFinal']) ? $_GET['dataFinal'] : '' ,
+        );
 
-        return view('index', compact('orcamentos'));
+        $registros = Orcamento::query();
+
+        if ($filtro['cliente']){
+            $registros->where('cliente','like', '%'. $filtro['cliente'] .'%');
+
+        }
+
+        if($filtro['vendedor'] !== ''){
+            $registros->where('vendedor','like', '%'. $filtro['vendedor'] .'%');
+
+        }
+
+        if($filtro['dataInicial'] !== '') {
+            $registros->whereDate('created_at', '>=', $filtro['dataInicial']);
+        }
+
+        if($filtro['dataFinal'] !== '') {
+            $registros->whereDate('created_at', '<=', $filtro['dataFinal']);
+        }
+
+        $orcamentos = $registros->orderBy('created_at', 'desc')->get();
+
+        return view('index', compact('orcamentos', 'filtro'));
     }
 
     /**

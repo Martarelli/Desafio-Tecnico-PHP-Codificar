@@ -12,6 +12,7 @@
     </div>
 @endif
 <div class="w-100 d-flex flex-column justify-content-center align-items-center ">
+    <h1 class="mt-3">Adicionar Orçamento</h1>
     <form class="w-50" action="/create/store" method="post">
         @csrf
         <div class="form-group">

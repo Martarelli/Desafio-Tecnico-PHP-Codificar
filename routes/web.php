@@ -15,5 +15,11 @@ use App\Http\Controllers\OrcamentoController;
 */
 
 Route::get('/', [OrcamentoController::class, 'index']);
+
 Route::get('/create', [OrcamentoController::class, 'create']);
 Route::post('/create/store', [OrcamentoController::class, 'store']);
+
+Route::get('/edit/{$id}', [OrcamentoController::class, 'edit']);
+Route::post('/update/{$id}', [OrcamentoController::class, 'update']);
+
+Route::delete('/destroy/{$id}', [OrcamentoController::class, 'destroy']);

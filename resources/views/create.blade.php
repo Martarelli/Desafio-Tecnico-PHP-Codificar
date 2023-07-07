@@ -1,7 +1,7 @@
 @extends('layouts/template')
 
 @section('content')
-
+{{-- Exibição do erro de validação --}}
 @if($errors->any())
     <div class="alert alert-danger m-3">
         <ul>
@@ -13,6 +13,7 @@
 @endif
 <div class="w-100 d-flex flex-column justify-content-center align-items-center ">
     <h1 class="mt-3">Adicionar Orçamento</h1>
+    {{-- Form de inclusão dos dados do orçamento --}}
     <form class="w-50" action="/create/store" method="post">
         @csrf
         <div class="form-group">
